@@ -1,0 +1,8 @@
+# create account
+POST http://localhost:5227/api/accounts HTTP/1.1
+content-type: application/json
+
+{
+    "userId": "0ff7eb46-4821-4c6f-90f1-8e5c64bace34",
+    "initialBalanceAmountInCents": 0
+}
