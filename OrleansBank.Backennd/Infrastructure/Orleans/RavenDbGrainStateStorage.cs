@@ -42,10 +42,3 @@ public class RavenDbGrainStateStorage(
         ? $"{stateName}/{grainId.Key}"
         : string.Empty;
 }
-
-public static class ServiceCollectionExtensions 
-{
-    public static IServiceCollection AddRavenDbGrainStateStorage(this IServiceCollection services) => services
-        .AddSingletonNamedService<IGrainStorage, RavenDbGrainStateStorage>("storage")
-        .AddSingleton<IGrainStorage, RavenDbGrainStateStorage>();
-}

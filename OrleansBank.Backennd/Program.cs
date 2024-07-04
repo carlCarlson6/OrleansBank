@@ -2,12 +2,12 @@ using OrleansBank.Backennd.Accounts;
 using OrleansBank.Backennd.Infrastructure.Orleans;
 using OrleansBank.Backennd.Infrastructure.RavenDb;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Host.AddOrleans();
-
+var builder = WebApplication
+    .CreateBuilder(args)
+    .UseOrleans();
+    
 builder.Services
-    .AddRavenDb(builder.Configuration)
-    .AddRavenDbGrainStateStorage();
+    .AddRavenDb(builder.Configuration);
 
 var app = builder.Build();
 

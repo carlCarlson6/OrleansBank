@@ -1,4 +1,5 @@
 using Orleans.Runtime;
+using OrleansBank.Backennd.Infrastructure.Orleans;
 
 namespace OrleansBank.Backennd.Accounts;
 
@@ -36,8 +37,8 @@ public class Account(
         storageName: "storage"
     )] IPersistentState<AccountState> accountPersistentState,
     [PersistentState(
-        stateName: "account-transaction",
-        storageName: "storage"
+        stateName: "account-transactions",
+        storageName: nameof(RavenDbGrainStateStorage)
     )] IPersistentState<AccountTransactions> transactionsPersistentState) : Grain, IAccount
 {
     public async Task Open(OpenAccountCommand command)
@@ -101,14 +102,20 @@ public class Account(
 [GenerateSerializer, Alias(nameof(AccountState))]
 public class AccountState
 {
+    [Id(0)]
     public string AccountId { get; set; }
+    
+    [Id(1)]
     public Guid CliendId { get; set; }
+    
+    [Id(2)]
     public int BalanceInCents { get; set; }
 }
 
 [GenerateSerializer, Alias(nameof(AccountTransactions))]
 public class AccountTransactions 
 {
+    [Id(0)]
     public List<AccountTransaction> Transactions { get; set; }
 }
 
